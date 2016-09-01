@@ -19,27 +19,6 @@
 #
 # Everything in this directory will become public
 
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-ifeq ($(USE_SVELTE_KERNEL),true)
-LOCAL_KERNEL := device/lge/hammerhead_svelte-kernel/zImage-dtb
-else
-
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-LOCAL_KERNEL := device/lge/hammerhead_fp-kernel/zImage-dtb
-else
-LOCAL_KERNEL := device/lge/hammerhead-kernel/zImage-dtb
-endif
-
-endif
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-
-PRODUCT_COPY_FILES := \
-    $(LOCAL_KERNEL):kernel
-
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.rc:root/init.hammerhead.rc \
     device/lge/hammerhead/init.hammerhead.usb.rc:root/init.hammerhead.usb.rc \
@@ -122,6 +101,10 @@ PRODUCT_COPY_FILES += \
 # For SPN display
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/spn-conf.xml:system/etc/spn-conf.xml
+
+# Qseecomd configuration file
+PRODUCT_COPY_FILES += \
+    device/lge/hammerhead/init.hammerhead.qseecomd.sh:system/bin/init.hammerhead.qseecomd.sh
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -282,7 +265,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sensors.georv=true \
     ro.qti.sensors.smgr_mag_cal_en=true \
     ro.qti.sensors.step_detector=true \
-    ro.qti.sensors.step_counter=true
+    ro.qti.sensors.step_counter=true \
     ro.qti.sensors.tap=false \
     ro.qti.sensors.facing=false \
     ro.qti.sensors.tilt=false \
@@ -381,6 +364,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-swap=false
 
+# Allow tethering without provisioning app
+PRODUCT_PROPERTY_OVERRIDES += \
+    net.tethering.noprovisioning=true
+
 # Modem debugger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
@@ -407,8 +394,24 @@ else
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
 endif
 
+# GAPPS
+GAPPS_VARIANT := micro
+GAPPS_FORCE_DIALER_OVERRIDES := true
+GAPPS_FORCE_MMS_OVERRIDES := true
+GAPPS_FORCE_BROWSER_OVERRIDES := true
+
+PRODUCT_COPY_FILES += \
+    vendor/opengapps/sources/arm/lib/23/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so \
+    vendor/opengapps/sources/arm/lib/23/libjni_keyboarddecoder.so:system/lib/libjni_keyboarddecoder.so
+
+# sexy bootanimation
+PRODUCT_COPY_FILES += device/lge/hammerhead/bootanimation.zip:system/media/bootanimation.zip
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
-$(call inherit-product-if-exists, vendor/qcom/gpu/msm8x74/msm8x74-gpu-vendor.mk)
+#$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
+#$(call inherit-product-if-exists, vendor/qcom/gpu/msm8x74/msm8x74-gpu-vendor.mk)
+
+# setup gapps config
+$(call inherit-product, vendor/google/build/opengapps-packages.mk)

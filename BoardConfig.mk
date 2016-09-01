@@ -25,8 +25,15 @@ TARGET_NO_BOOTLOADER := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1
+# Define kernel config for inline building
+TARGET_KERNEL_CONFIG := blu_spark_hammerhead_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/engstk_hammerhead
+
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1 androidboot.bootdevice=msm_sdcc.1
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+KERNEL_TOOLCHAIN := /media/dev/stuff/gcc-linaro/bin
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-gnueabihf-
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -81,13 +88,14 @@ TARGET_USES_ION := true
 ifeq ($(HOST_OS),linux)
   ifeq ($(TARGET_BUILD_VARIANT),user)
     ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT := false
     endif
   endif
 endif
-DONT_DEXPREOPT_PREBUILTS := true
+#DONT_DEXPREOPT_PREBUILTS := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824

@@ -20,14 +20,14 @@ LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS
 # QCamera3Factory.cpp has unused parameters.
 LOCAL_CFLAGS += -Wno-unused-parameter
 # QCamera3Channel.cpp compares array 'str' to a null pointer.
-LOCAL_CLANG_CFLAGS += -Wno-tautological-pointer-compare
+LOCAL_CLANG_CFLAGS += -Wno-tautological-pointer-compare -Wno-unused-parameter
 
 LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../stack/common \
         frameworks/native/include/media/openmax \
         frameworks/native/include \
         frameworks/av/include \
-        hardware/qcom/media/libstagefrighthw \
+        hardware/qcom/media/msm8974/libstagefrighthw \
         system/media/camera/include \
         $(LOCAL_PATH)/../../mm-image-codec/qexif \
         $(LOCAL_PATH)/../../mm-image-codec/qomx_core \
@@ -35,6 +35,9 @@ LOCAL_C_INCLUDES := \
 
 LOCAL_C_INCLUDES += \
         hardware/qcom/display/msm8974/libgralloc
+
+LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 LOCAL_SHARED_LIBRARIES := libcamera_client liblog libhardware libutils libcutils libdl libsync
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
