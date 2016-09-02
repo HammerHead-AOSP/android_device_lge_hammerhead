@@ -15,7 +15,23 @@
 #
 $(call inherit-product, device/lge/hammerhead/full_hammerhead.mk)
 
-PRODUCT_NAME := aosp_hammerhead
+PRODUCT_NAME := aosp_hammerhead_gapps
 
-PRODUCT_PACKAGES += \
-   Launcher3
+# GAPPS
+GAPPS_VARIANT := micro
+GAPPS_FORCE_DIALER_OVERRIDES := true
+GAPPS_FORCE_MMS_OVERRIDES := true
+GAPPS_FORCE_BROWSER_OVERRIDES := true
+
+PRODUCT_PACKAGES += Photos \
+                    TagGoogle \
+                    PrebuiltDeskClockGoogle \
+                    CalculatorGoogle \
+                    GoogleContacts \
+                    GoogleCamera \
+                    CloudPrint2
+
+PRODUCT_PACKAGES += WebViewGoogle
+
+# setup gapps config
+$(call inherit-product-if-exists, vendor/google/build/opengapps-packages.mk)

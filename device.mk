@@ -380,7 +380,7 @@ PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.diag.rc.user:root/init.hammerhead.diag.rc
 endif
 
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
+ifneq ($(filter aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead_fp.rc:root/init.hammerhead_fp.rc \
     hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/fw_bcmdhd_fp.bin:system/vendor/firmware/fw_bcmdhd.bin \
@@ -394,24 +394,12 @@ else
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
 endif
 
-# GAPPS
-GAPPS_VARIANT := micro
-GAPPS_FORCE_DIALER_OVERRIDES := true
-GAPPS_FORCE_MMS_OVERRIDES := true
-GAPPS_FORCE_BROWSER_OVERRIDES := true
-
-PRODUCT_COPY_FILES += \
-    vendor/opengapps/sources/arm/lib/23/libjni_latinimegoogle.so:system/lib/libjni_latinimegoogle.so \
-    vendor/opengapps/sources/arm/lib/23/libjni_keyboarddecoder.so:system/lib/libjni_keyboarddecoder.so
-
 # sexy bootanimation
 PRODUCT_COPY_FILES += device/lge/hammerhead/bootanimation.zip:system/media/bootanimation.zip
 
+PRODUCT_COPY_FILES += \
+    vendor/opengapps/sources/arm/lib/23/libjni_latinimegoogle.so:system/vendor/lib/libjni_latinimegoogle.so \
+    vendor/opengapps/sources/arm/lib/23/libjni_keyboarddecoder.so:system/vendor/lib/libjni_keyboarddecoder.so
+
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-
-#$(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
-#$(call inherit-product-if-exists, vendor/qcom/gpu/msm8x74/msm8x74-gpu-vendor.mk)
-
-# setup gapps config
-$(call inherit-product, vendor/google/build/opengapps-packages.mk)

@@ -1,5 +1,5 @@
 #
-# Copyright 2013 The Android Open Source Project
+# Copyright 2013 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+$(call inherit-product, device/lge/hammerhead/full_hammerhead.mk)
 
-for i in user userdebug eng
-	do
-		add_lunch_combo aosp_hammerhead-$i
-		add_lunch_combo aosp_hammerhead_gapps-$i
-done
+PRODUCT_NAME := aosp_hammerhead
+
+#PRODUCT_PACKAGES += \
+#    Launcher3
+
