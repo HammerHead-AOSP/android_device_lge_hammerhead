@@ -16,7 +16,7 @@
 
 <webviewproviders>
     <!-- Google Chrome -->
-    <webviewprovider description="Chrome Stable" packageName="com.android.chrome" />
+    <webviewprovider description="Chrome Stable" packageName="com.android.chrome" availableByDefault="true" />
 
     <!-- Google Chrome Beta -->
     <webviewprovider description="Chrome Beta" packageName="com.chrome.beta">
@@ -37,7 +37,7 @@
     <webviewprovider description="Chrome Debug" packageName="com.google.android.apps.chrome" />
 
     <!-- Google WebView implementation -->
-    <webviewprovider description="Google WebView" packageName="com.google.android.webview" />
+    <webviewprovider description="Google WebView" packageName="com.google.android.webview" availableByDefault="true" />
 
     <!-- The default WebView implementation -->
     <webviewprovider description="Android WebView" packageName="com.android.webview" availableByDefault="true" />
