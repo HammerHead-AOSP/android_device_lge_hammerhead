@@ -76,7 +76,6 @@
 /dev/msm_camera(/.*)?                  u:object_r:video_device:s0
 /dev/media([0-9])+                     u:object_r:video_device:s0
 /dev/jpeg([0-9])+                      u:object_r:video_device:s0
-/dev/video([0-9])+                      u:object_r:video_device:s0
 
 # Qualcomm MSM Audio devices
 /dev/msm_acdb                      u:object_r:audio_device:s0
