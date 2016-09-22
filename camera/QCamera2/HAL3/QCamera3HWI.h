@@ -296,8 +296,6 @@ private:
 
     cam_stream_size_info_t mStreamConfigInfo;
 
-    cam_stream_size_info_t mStreamConfigInfo;
-
     static const QCameraMap EFFECT_MODES_MAP[];
     static const QCameraMap WHITE_BALANCE_MODES_MAP[];
     static const QCameraMap SCENE_MODES_MAP[];
