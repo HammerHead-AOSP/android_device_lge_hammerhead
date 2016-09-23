@@ -398,12 +398,5 @@ else
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
 endif
 
-# sexy bootanimation
-PRODUCT_COPY_FILES += device/lge/hammerhead/bootanimation.zip:system/media/bootanimation.zip
-
-PRODUCT_COPY_FILES += \
-    vendor/opengapps/sources/arm/lib/23/libjni_latinimegoogle.so:system/vendor/lib/libjni_latinimegoogle.so \
-    vendor/opengapps/sources/arm/lib/23/libjni_keyboarddecoder.so:system/vendor/lib/libjni_keyboarddecoder.so
-
 # setup dalvik vm configs.
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
