@@ -22,5 +22,5 @@
     <bool name="has_powercontrol_widget">false</bool>
 
     <!-- Whether to show a preference item for regulatory information in About phone -->
-    <bool name="config_show_regulatory_info">true</bool>
+    <bool name="config_show_regulatory_info">false</bool>
 </resources>

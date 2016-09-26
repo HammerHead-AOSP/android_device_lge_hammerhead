@@ -372,6 +372,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tethering.noprovisioning=true
 
+# Mobile Data provision prop
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.android.prov_mobiledata=false
+
 # old-apns.conf
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/old-apns-conf.xml:system/etc/old-apns-conf.xml
