@@ -372,6 +372,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     net.tethering.noprovisioning=true
 
+# old-apns.conf
+PRODUCT_COPY_FILES += \
+    device/lge/hammerhead/old-apns-conf.xml:system/etc/old-apns-conf.xml
+
 # Modem debugger
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
