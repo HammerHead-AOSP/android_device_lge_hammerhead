@@ -332,10 +332,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.vc_call_vol_steps=6
 
-# Fix camera derp
-PRODUCT_PROPERTY_OVERRIDES += \
-	media.stagefright.codecremote=false
-
 # Setup custom emergency number list based on the MCC. This is needed by RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.custom_ecc=1
@@ -355,7 +351,9 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Camera configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera.disable_zsl_mode=1
+    camera.disable_zsl_mode=1 \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
 
 # Input resampling configuration
 PRODUCT_PROPERTY_OVERRIDES += \
